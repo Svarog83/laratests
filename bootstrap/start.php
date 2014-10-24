@@ -27,9 +27,10 @@ $app = new Illuminate\Foundation\Application;
 $env = $app->detectEnvironment(function()
 {
     $env = 'production';
-
     if ( isset ( $_SERVER['PHP_SELF'] ) && strpos ( $_SERVER['PHP_SELF'], 'codecept' ) !== false )
-            $env = 'testing';
+        $env = 'testing';
+    else if ( isset ( $_SERVER['PHP_SELF'] ) && strpos ( $_SERVER['PHP_SELF'], 'artisan' ) !== false )
+        $env = 'testing';
     else if ( isset ( $_SERVER['SERVER_NAME'] ) && $_SERVER['SERVER_NAME'] == 'lar.com' )
         $env = 'local';
     else if ( isset ( $_SERVER['USERDOMAIN'] ) && $_SERVER['USERDOMAIN'] == 'SVAROG-PC2013' )

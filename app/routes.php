@@ -23,8 +23,8 @@ Route::get('/info', function()
 
 Route::get('/users', function()
 {
-	$user = DB::table('users')->find(2);
-    return $user->username;
+	$users = DB::table('users')->get();
+    return $users;
 });
 
 /*
