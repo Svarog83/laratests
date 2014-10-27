@@ -11,6 +11,11 @@
 |
 */
 
+Event::listen('Larabook.Registration.Events.UserRegistered', function( $event )
+{
+    mail ( 'svaroggg@gmail.com', 'Debug data', print_r ( $event, true ) );
+});
+
 Route::get('/', [
     'as' => 'home',
     'uses' => 'PagesController@home'
