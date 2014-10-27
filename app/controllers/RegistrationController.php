@@ -50,7 +50,10 @@ class RegistrationController extends BaseController {
         );
 
         Auth::login($user);
-        return Redirect::home();
+
+        Flash::overlay('Welcome to my test site');
+
+        return Redirect::home()->with('flash_message', 'Welcome aboard!');
     }
 
 }
