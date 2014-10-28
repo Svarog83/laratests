@@ -11,55 +11,62 @@
 |
 */
 
-Event::listen('Larabook.Registration.Events.UserRegistered', function( $event )
-{
+Event::listen( 'Larabook.Registration.Events.UserRegistered', function ( $event ) {
     //mail ( 'svaroggg@gmail.com', 'Debug data', print_r ( $event, true ) );
-});
+} );
 
-Route::get('/', [
-    'as' => 'home',
-    'uses' => 'PagesController@home'
+Route::get( '/', [
+        'as' => 'home',
+        'uses' => 'PagesController@home'
 ] );
 
-Route::get('/info', function()
-{
-	return View::make('info');
-});
+Route::get( '/info', function () {
+    return View::make( 'info' );
+} );
 
-Route::get('/users', function()
-{
-	$users = DB::table('users')->get();
+Route::get( '/users', function () {
+    $users = DB::table( 'users' )->get();
     return $users;
-});
+} );
 
 /*
  * Registration!
  */
-Route::get ('register', [
-            'as' => 'register_path',
-            'uses' => 'RegistrationController@create'
-            ]
+Route::get( 'register', [
+                'as' => 'register_path',
+                'uses' => 'RegistrationController@create'
+        ]
 );
 
-Route::post ('register', [
-            'as' => 'register_path',
-            'uses' => 'RegistrationController@store'
-            ]
+Route::post( 'register', [
+                'as' => 'register_path',
+                'uses' => 'RegistrationController@store'
+        ]
 );
 
-Route::get('login', [
-   'as' => 'login_path',
-    'uses' => 'SessionsController@create'
-]);
+Route::get( 'login', [
+        'as' => 'login_path',
+        'uses' => 'SessionsController@create'
+] );
 
-Route::post('login', [
-   'as' => 'login_path',
-    'uses' => 'SessionsController@store'
-]);
+Route::post( 'login', [
+        'as' => 'login_path',
+        'uses' => 'SessionsController@store'
+] );
 
-Route::get( '/statuses', 'StatusController@index');
+Route::get( '/statuses',
+        [
+                'as' => 'statuses_path',
+                'uses' => 'StatusController@index'
+        ] );
 
 Route::get( '/logout', [
-    'as' => 'logout_path',
-    'uses' => 'SessionsController@destroy'
-]);
+        'as' => 'logout_path',
+        'uses' => 'SessionsController@destroy'
+] );
+
+Route::post( 'statuses', [
+                'as' => 'statuses_path',
+                'uses' => 'StatusController@store'
+        ]
+);

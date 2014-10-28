@@ -40,7 +40,8 @@
                       <li class="divider"></li>
                       <li><a href="#">One more separated link</a></li>
                       @else
-                      <li><a href="/login">Log In</a></li>
+                      <li>{{link_to_route('register_path', 'Sign up');}}</li>
+                      <li>{{link_to_route('login_path', 'Log in');}}</li>
 
                       @endif
                     </ul>

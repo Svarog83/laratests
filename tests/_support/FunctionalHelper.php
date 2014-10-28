@@ -13,15 +13,6 @@ use Laracasts\TestDummy\Factory as TestDummy;
 class FunctionalHelper extends \Codeception\Module {
 
     /**
-     * @param array $overrides
-     */
-    public function haveAnAccount($overrides=[])
-    {
-        TestDummy::create ('Larabook\Users\User', $overrides);
-    }
-
-
-    /**
      *
      */
     public function signIn()
@@ -40,4 +31,33 @@ class FunctionalHelper extends \Codeception\Module {
         $I->click('Sign in');
     }
 
+    public function postAStatus($body)
+    {
+        /**
+        * @var \FunctionalTester $I
+        */
+        $I = $this->getModule('Laravel4');
+        $I->fillField('Status:', $body);
+        $I->click('Post Status');
+        //$this->have('Larabook\Statuses\Status', $overrides);
+    }
+
+    /**
+     * @param $model
+     * @param array $overrides
+     * @return mixed
+     */
+    public function have ($model, $overrides = [])
+    {
+        return TestDummy::create ($model, $overrides);
+    }
+
+    /**
+     * @param array $overrides
+     * @return mixed
+     */
+    public function haveAnAccount($overrides=[])
+    {
+        return $this->have('Larabook\Users\User', $overrides);
+    }
 }
