@@ -67,7 +67,10 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+    if ( Auth::check()) {
+            Flash::overlay('You are already signed up!');
+            return Redirect::to( '/' );
+        }
 });
 
 /*
