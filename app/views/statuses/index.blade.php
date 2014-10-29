@@ -21,7 +21,7 @@
     <h2>Statuses</h2>
     @foreach ($statuses as $status)
         <article>
-            {{$status->body}}
+            {{{$status->body}}}
         </article>
     @endforeach
         

@@ -1,5 +1,6 @@
 <?php namespace Larabook\Statuses;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Larabook\Statuses\Status;
 use Larabook\Users\User;
 
@@ -24,12 +25,22 @@ class StatusRepository {
     }
 
     /**
-     * @param User $user
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @param $userId
+     * @return HasMany
      */
     public function getAllForUserId( $userId )
     {
         return Status::whereUserId($userId)->get();
+    }
+
+    /**
+     * @param User $user
+     * @internal param $userId
+     * @return HasMany
+     */
+    public function getAllForUser( User $user )
+    {
+        return $user->statuses()->get();
     }
 
 } 
