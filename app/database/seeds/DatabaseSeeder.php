@@ -1,8 +1,26 @@
 <?php
 
+/**
+ * Class DatabaseSeeder
+ */
 class DatabaseSeeder extends Seeder {
+    /**
+     * @var array
+     */
+    protected $tables = [
+            'users',
+            'statuses'
+    ];
 
-	/**
+    /**
+     * @var array
+     */
+    protected $seeders = [
+        'UsersTableSeeder',
+        'StatusesTableSeeder'
+    ];
+
+    /**
 	 * Run the database seeds.
 	 *
 	 * @return void
@@ -11,7 +29,26 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
-		// $this->call('UserTableSeeder');
+        $this->cleanDatabase();
+
+        foreach ($this->seeders AS $seedClass)
+        {
+            $this->call($seedClass);
+        }
+
 	}
+
+    /**
+     * Clean out the database for a new seed generation
+     */
+    private function cleanDatabase()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        foreach ($this->tables as $table)
+        {
+            DB::table($table)->truncate();
+        }
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+    }
 
 }

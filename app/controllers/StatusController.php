@@ -29,6 +29,8 @@ class StatusController extends \BaseController {
     {
         $this->statusRepository = $statusRepository;
         $this->publishStatusForm = $publishStatusForm;
+
+        $this->beforeFilter('auth');
     }
 
     /**

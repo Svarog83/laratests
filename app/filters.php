@@ -43,7 +43,9 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			Flash::message('Please login first');
+
+            return Redirect::guest('login');
 		}
 	}
 });
