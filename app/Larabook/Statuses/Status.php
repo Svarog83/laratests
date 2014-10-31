@@ -6,6 +6,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Larabook\Statuses\Events\StatusWasPublished;
 use Laracasts\Commander\Events\EventGenerator;
+use Laracasts\Presenter\PresentableTrait;
 
 /**
  * Class Status
@@ -13,7 +14,7 @@ use Laracasts\Commander\Events\EventGenerator;
  */
 class Status extends Eloquent {
 
-    use RemindableTrait, EventGenerator;
+    use RemindableTrait, EventGenerator, PresentableTrait;
     /**
      * Fillable fileds for a new status
      * @var array
@@ -21,11 +22,18 @@ class Status extends Eloquent {
     protected $fillable = ['body'];
 
     /**
+     * Path to the Presenter of the status
+     *
+     * @var string
+     */
+    protected $presenter = 'Larabook\Statuses\StatusPresenter';
+
+    /**
      * A status belongs to a user
      */
     public function user()
     {
-        $this->belongsTo('Larabook\Users\User');
+        return $this->belongsTo('Larabook\Users\User');
     }
 
     /**
