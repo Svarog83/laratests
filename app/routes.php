@@ -25,7 +25,10 @@ Route::get( '/info', function () {
 } );
 
 
-Route::get( '/users', 'UsersController@index');
+Route::get( '/users', [
+    'as' => 'users_path',
+    'uses' => 'UsersController@index'
+]);
 /*Route::get( '/users', function () {
     $users = DB::table( 'users' )->get();
     return $users;
@@ -67,8 +70,13 @@ Route::get( '/logout', [
         'uses' => 'SessionsController@destroy'
 ] );
 
-Route::post( 'statuses', [
+Route::post( '/statuses', [
                 'as' => 'statuses_path',
                 'uses' => 'StatusController@store'
         ]
 );
+
+Route::get( '@{username}', [
+    'as' => 'profile_path',
+    'uses' => 'UsersController@show'
+]);

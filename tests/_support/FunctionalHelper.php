@@ -18,8 +18,9 @@ class FunctionalHelper extends \Codeception\Module {
     public function signIn()
     {
         $email = 'foo@examle.com';
+        $username = 'Foobar';
         $password = 'foo';
-        $this->haveAnAccount(['email'=>$email, 'password' => $password]);
+        $this->haveAnAccount(['username' => $username, 'email'=>$email, 'password' => $password]);
         /**
          * @var \FunctionalTester $I
          */
