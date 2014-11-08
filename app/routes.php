@@ -24,10 +24,12 @@ Route::get( '/info', function () {
     return View::make( 'info' );
 } );
 
-Route::get( '/users', function () {
+
+Route::get( '/users', 'UsersController@index');
+/*Route::get( '/users', function () {
     $users = DB::table( 'users' )->get();
     return $users;
-} );
+} );*/
 
 /*
  * Registration!
