@@ -54,8 +54,14 @@ class SessionsController extends \BaseController {
 
 
         //if is valid then try to sing in
-        if (Auth::attempt($formData))
+        if ( ! Auth::attempt($formData))
         {
+            Flash::message('We were unable to sing in. Please try again.');
+            return Redirect::back()->withInput();
+        }
+        else
+        {
+
             // redirect to status
             Flash::message('Welcome back!');
             return Redirect::intended('statuses');

@@ -3,12 +3,9 @@
 use Illuminate\Console\Command;
 use Larabook\Registration\RegisterUserCommand;
 use Larabook\Forms\RegistrationForm;
-use Larabook\Core\CommandBus;
 
 
 class RegistrationController extends BaseController {
-
-    use CommandBus;
 
     /**
      * @var RegistrationForm
@@ -43,13 +40,15 @@ class RegistrationController extends BaseController {
      */
     public function store()
     {
-        $this->registrationForm->validate( Input::all() );
+        $this->registrationForm->validate(Input::all());
 
-        extract( Input::only('username', 'email', 'password') );
+       /* extract( Input::only('username', 'email', 'password') );
 
         $user = $this->execute(
                 new RegisterUserCommand ( $username, $email, $password )
-        );
+        );*/
+
+        $user = $this->execute(RegisterUserCommand::class);
 
         Auth::login($user);
 

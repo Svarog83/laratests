@@ -78,12 +78,31 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
     /**
      * Checks if the given user is the same as the current one
      *
-     * @param User $user
+     * @param $user
      * @return bool
      */
-    public function is(User $user)
+    public function is($user)
     {
+        if (is_null($user)) return false;
+
         return $this->username == $user->username;
+    }
+
+    public function follows()
+    {
+        return $this->belongsToMany('Larabook\Users\User', 'follows', 'follower_id', 'followed_id')->withTimestamps();
+    }
+
+    /**
+     * Determing if current user is followed by other user
+     *
+     * @param User $otherUser
+     * @return bool
+     */
+    public function isFollowedBy(User $otherUser)
+    {
+        $idsWhoOtherUserFollows = $otherUser->follows()->lists('followed_Id');
+        return in_array($this->id, $idsWhoOtherUserFollows);
     }
 
 }

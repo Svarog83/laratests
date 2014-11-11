@@ -11,7 +11,8 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                <li>{{ link_to_route('users_path', 'Users') }}</li>
+                <li>{{ link_to_route('users_path', 'Browse Users') }}</li>
+                <li>{{ link_to_route('statuses_path', 'Statuses') }}</li>
               </ul>
 
               <ul class="nav navbar-nav navbar-right">
@@ -23,7 +24,7 @@
                     <ul class="dropdown-menu" role="menu">
 
                       <li>{{ link_to_route('profile_path', 'Your Profile', $currentUser->username) }}</li>
-                      <li><a href="#">Something else here</a></li>
+                      <li><a href="/statuses">All statuses</a></li>
                       <li class="divider"></li>
                       <li><a href="#">Separated link</a></li>
                       <li class="divider"></li>

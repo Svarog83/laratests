@@ -43,4 +43,17 @@ class StatusRepository {
         return $user->statuses()->with('user')->orderBy("created_at", "desc")->get();
     }
 
+    /**
+     * @param User $user
+     * @return array|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function getFeedForUser(User $user)
+    {
+        $userIds = $user->follows()->lists('followed_id');
+        $userIds[] = $user->id;
+
+        return Status::whereIn('user_id', $userIds)->latest()->get();
+    }
+
+
 } 
