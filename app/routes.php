@@ -11,6 +11,7 @@
 |
 */
 
+
 Event::listen( 'Larabook.Registration.Events.UserRegistered', function ( $event ) {
     //mail ( 'svaroggg@gmail.com', 'Debug data', print_r ( $event, true ) );
 } );
@@ -33,6 +34,12 @@ Route::get( '/users', [
     $users = DB::table( 'users' )->get();
     return $users;
 } );*/
+
+Route::get( '/calendar', function () {
+
+    echo 'calendar';
+
+} );
 
 /*
  * Registration!

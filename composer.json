@@ -10,8 +10,9 @@
 		"liil/kint": "v1.0",
 		"laracasts/flash": "1.2",
 		"laracasts/presenter": "0.1.4",
-        "laracasts/validation" : "1.2.*"
-
+        "laracasts/validation" : "1.2.*",
+		"barryvdh/laravel-debugbar": "v1.8.2",
+		"itsgoingd/clockwork": "v1.6"
 	},
     "require-dev": {
         		"barryvdh/laravel-ide-helper": "~1.11@dev",

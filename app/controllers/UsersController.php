@@ -31,6 +31,9 @@ class UsersController extends \BaseController {
     public function show($username)
     {
         $user = $this->userRepository->findByUsername($username);
+
+//        Debugbar::info($user);
+
         return View::make('users.show')->withUser($user);
     }
 
