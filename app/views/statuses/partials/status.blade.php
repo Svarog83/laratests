@@ -9,4 +9,6 @@
         </div>
         {{{$status->body}}}
 
+        @include('users.partials.follow-form', ['user' => $status->user])
+
 </article>

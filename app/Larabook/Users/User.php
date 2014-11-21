@@ -11,7 +11,7 @@ use Laracasts\Presenter\PresentableTrait;
 
 class User extends Eloquent implements UserInterface, RemindableInterface {
 
-	use UserTrait, RemindableTrait, EventGenerator, PresentableTrait;
+	use UserTrait, RemindableTrait, EventGenerator, PresentableTrait, FollowableTrait;
 
     /**
      * @var array which fields may be mass assigned
@@ -55,7 +55,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      */
     public function statuses()
     {
-        return $this->hasMany('Larabook\Statuses\Status');
+        return $this->hasMany('Larabook\Statuses\Status')->latest();
     }
 
     /**
@@ -88,21 +88,37 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
         return $this->username == $user->username;
     }
 
-    public function follows()
+    /**
+     * Get the list of users that the current user followedUsers
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function followedUsers()
     {
         return $this->belongsToMany('Larabook\Users\User', 'follows', 'follower_id', 'followed_id')->withTimestamps();
     }
 
     /**
-     * Determing if current user is followed by other user
+     * Get the list of users who follow the current user
      *
-     * @param User $otherUser
-     * @return bool
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function isFollowedBy(User $otherUser)
+    public function followers()
     {
-        $idsWhoOtherUserFollows = $otherUser->follows()->lists('followed_Id');
-        return in_array($this->id, $idsWhoOtherUserFollows);
+        return $this->belongsToMany('Larabook\Users\User', 'follows', 'followed_id', 'follower_id')->withTimestamps();
     }
+
+    /**
+        * Determing if current user is followed by other user
+        *
+        * @param User $otherUser
+        * @return bool
+        */
+       public function isFollowedBy(User $otherUser)
+       {
+           $idsWhoOtherUserFollows = $otherUser->followedUsers()->lists('followed_Id');
+           return in_array($this->id, $idsWhoOtherUserFollows);
+       }
+
 
 }
